@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="4e8a03a2-fff9-44b9-8182-4021ede13e65" name="HCEC-Azure" url="https://hcec-gis.australiaeast.cloudapp.azure.com/">
+        <fileTransfer rootFolder="/hcec_data/caddy/www" accessType="SFTP" host="hcec-gis.australiaeast.cloudapp.azure.com" port="22" sshConfigId="fa4831fd-246e-43b6-9b1f-de592be5cbd7" sshConfig="azureuser@hcec-gis.australiaeast.cloudapp.azure.com:22 key" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

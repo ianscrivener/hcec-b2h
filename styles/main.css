@@ -1,0 +1,133 @@
+html,
+body {
+  font-family: Arial, sans-serif;
+}
+
+nav {
+  position: fixed;
+  height: 50px;
+  margin-bottom: 1em;
+  top: 0;
+  right: 0;
+  left: 0;
+  background: #323232;
+  padding: 3px 5px;
+}
+
+footer {
+  position: fixed;
+  height: 25px;
+  margin-top: 1em;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: #323232;
+  padding: 3px 5px;     /* top/bottom left/right */
+}
+
+.footerRow {
+  display: table;
+  width: 100%; /*Optional*/
+  table-layout: fixed; /*Optional*/
+  border-spacing: 5px; /*Optional*/
+  color: #aaaaaa;
+  font-size: 10px;
+}
+
+.footerColumn {
+  display: table-cell;
+}
+
+body > div.container {
+  position: fixed;
+  top: calc(50px + 1em);
+  bottom: calc(25px + 1em);
+  right: 0;
+  left: 0;
+  vertical-align: top;
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+  /*width: calc(100% - 300px - 0.25em);*/
+  float: left;
+  padding: 0;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  color: #323232;
+}
+
+/*#sidebar {*/
+/*  height: 100%;*/
+/*  width: calc(300px);*/
+/*  float: right;*/
+/*  background: red;*/
+/*}*/
+
+
+// off-canvas-menu
+
+
+   .hamburger-menu {
+     position: absolute;
+     top: 0;
+     padding: 5px;
+     cursor: pointer;
+     background-color: transparent;
+     border: none;
+     z-index: 1;
+   }
+
+.hamburger-menu.close {
+  right: calc(100% - 220px);
+  display: none;
+}
+
+.hamburger-menu.open {
+  right: 0;
+}
+
+.offcanvas-menu {
+  position: fixed;
+  right: -220px;
+  top: 0;
+  width: 220px;
+  height: 100%;
+  transition: all 0.3s;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+.offcanvas-menu:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 35px;
+  background-color: #333;
+}
+
+.offcanvas-menu {
+  background: #d0d0d0;
+}
+
+.offcanvas-menu ul {
+  padding: 25px 10px 10px;
+  list-style: none;
+}
+
+.offcanvas-menu a {
+  color: #000;
+  text-decoration: none;
+}
+
+.offcanvas-menu.show {
+  right: 0;
+}
+
+#menu-toggle-open.show {
+  display: none;
+}
