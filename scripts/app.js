@@ -171,7 +171,7 @@ async function main() {
 
 
 //   L.control.layers(baseMaps).addTo(map);
-L.control.layers(baseMaps, overlayMaps).addTo(map);
+// L.control.layers(baseMaps, overlayMaps).addTo(map);
 // L.control.layers(overlayMaps).addTo(map);
 
 

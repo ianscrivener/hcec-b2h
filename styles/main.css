@@ -1,9 +1,25 @@
 html,
 body {
   font-family: Arial, sans-serif;
+  color: #000;
+
 }
 
-nav {
+/*#mapid {*/
+/*  position: absolute;*/
+/*  top: 35px;  !* Height of the header bar *!*/
+/*  bottom: 18px;  !* Height of the footer bar (15px + 3px padding) *!*/
+/*  left: 0;*/
+/*  right: 0;*/
+/*  z-index: 7777;*/
+/*}*/
+
+a:link {color: #bababa;}
+a:visited {color: #bababa;}
+a:hover {color: #bababa;}
+a:active {color: #bababa;}
+
+#topbar {
   position: fixed;
   height: 50px;
   margin-bottom: 1em;
@@ -12,6 +28,39 @@ nav {
   left: 0;
   background: #323232;
   padding: 3px 5px;
+  z-index: 8888; /* Higher than map's z-index */
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  display: inline;
+}
+
+.nav_title {
+  position: fixed;
+  font-family: "Arial Rounded MT Bold";
+  color: #bababa;
+  font-size: 150%;
+  padding-left: 15px;
+  padding-top: 10px;
+}
+.nav_content {
+  position: fixed;
+  right: 12px;
+  padding-top: 18px;
+  color: #bababa;
+  font-size: 100%;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.nav_content_link {
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 footer {
@@ -23,6 +72,8 @@ footer {
   left: 0;
   background: #323232;
   padding: 3px 5px;     /* top/bottom left/right */
+  z-index: 8888;  /* Higher than map's z-index */
+
 }
 
 .footerRow {
@@ -67,67 +118,67 @@ body > div.container {
 /*}*/
 
 
-// off-canvas-menu
+/*// off-canvas-menu*/
 
 
-   .hamburger-menu {
-     position: absolute;
-     top: 0;
-     padding: 5px;
-     cursor: pointer;
-     background-color: transparent;
-     border: none;
-     z-index: 1;
-   }
+/*   .hamburger-menu {*/
+/*     position: absolute;*/
+/*     top: 0;*/
+/*     padding: 5px;*/
+/*     cursor: pointer;*/
+/*     background-color: transparent;*/
+/*     border: none;*/
+/*     z-index: 1;*/
+/*   }*/
 
-.hamburger-menu.close {
-  right: calc(100% - 220px);
-  display: none;
-}
+/*.hamburger-menu.close {*/
+/*  right: calc(100% - 220px);*/
+/*  display: none;*/
+/*}*/
 
-.hamburger-menu.open {
-  right: 0;
-}
+/*.hamburger-menu.open {*/
+/*  right: 0;*/
+/*}*/
 
-.offcanvas-menu {
-  position: fixed;
-  right: -220px;
-  top: 0;
-  width: 220px;
-  height: 100%;
-  transition: all 0.3s;
-  padding: 5px;
-  box-sizing: border-box;
-}
+/*.offcanvas-menu {*/
+/*  position: fixed;*/
+/*  right: -220px;*/
+/*  top: 0;*/
+/*  width: 220px;*/
+/*  height: 100%;*/
+/*  transition: all 0.3s;*/
+/*  padding: 5px;*/
+/*  box-sizing: border-box;*/
+/*}*/
 
-.offcanvas-menu:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 100%;
-  height: 35px;
-  background-color: #333;
-}
+/*.offcanvas-menu:before {*/
+/*  content: "";*/
+/*  position: absolute;*/
+/*  top: 0;*/
+/*  right: 0;*/
+/*  width: 100%;*/
+/*  height: 35px;*/
+/*  background-color: #333;*/
+/*}*/
 
-.offcanvas-menu {
-  background: #d0d0d0;
-}
+/*.offcanvas-menu {*/
+/*  background: #d0d0d0;*/
+/*}*/
 
-.offcanvas-menu ul {
-  padding: 25px 10px 10px;
-  list-style: none;
-}
+/*.offcanvas-menu ul {*/
+/*  padding: 25px 10px 10px;*/
+/*  list-style: none;*/
+/*}*/
 
-.offcanvas-menu a {
-  color: #000;
-  text-decoration: none;
-}
+/*.offcanvas-menu a {*/
+/*  color: #000;*/
+/*  text-decoration: none;*/
+/*}*/
 
-.offcanvas-menu.show {
-  right: 0;
-}
+/*.offcanvas-menu.show {*/
+/*  right: 0;*/
+/*}*/
 
-#menu-toggle-open.show {
-  display: none;
-}
+/*#menu-toggle-open.show {*/
+/*  display: none;*/
+/*}*/
