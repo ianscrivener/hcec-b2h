@@ -15,7 +15,6 @@ function remSquareBrackets(val){
     return val.replace('[', '').replace(']', '')
 }
 
-
 async function getBaseLayers() {
     const response      = await fetch(url);
     const data          = await response.text();
@@ -42,8 +41,6 @@ async function getBaseLayers() {
         const columns               = row.split(',');
         let show                   = Number(columns[0])===1;
 
-
-
         if(show){
             // let structuredClone          = structuredClone(layerTemplate);
             let structuredClone             = JSON.parse(JSON.stringify(layerTemplate));
@@ -66,8 +63,6 @@ async function getBaseLayers() {
             // console.log(columns[9], "~", layerConfigArray[j].showLayers);
             console.log(layerConfigArray[j]);
         }
-
     }
     return layerConfigArray;
 }
-

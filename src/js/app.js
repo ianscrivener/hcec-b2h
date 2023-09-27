@@ -1,4 +1,6 @@
-// constants                              #######################
+// ############################################
+// constants
+
 const json_file = 'layers.json';
 
 const conf = {
@@ -21,7 +23,7 @@ let zState = {
 
 // helper function - load layer JSONL      ######################
 async function loadJsonl() {
-    const response = await fetch('layers.jsonl');
+    const response = await fetch('__config/layers.jsonl');
     if (!response.ok) {
         throw new Error('HTTP status ' + response.status);
     }

@@ -13,31 +13,26 @@
 <script src="https://unpkg.com/esri-leaflet-vector@4.1.0/dist/esri-leaflet-vector.js" crossorigin=""></script>
 
 
-<link rel="stylesheet" href="styles/main.css" />
-<link rel="stylesheet" href="styles/overlay.css" />
-<link rel="stylesheet" href="styles/layers.css" />
+<link rel="stylesheet" href="dist/styles.css" />
 
 <body>
-<div id="topbar">
-    <div class="nav_title" onclick="overlay_on('ol1')">Barrington to Hawkesbury</div>
-    <div class="nav_content">
-        <ul>
-            <li><a href="#home" class="nav_content_link" onclick="overlay_on('ol1')">About B2H</a></li>
-            <li><a href="#news" class="nav_content_link" onclick="overlay_on('ol2')">Refugia Projections</a></li>
-            <li><a href="#contact" class="nav_content_link" onclick="overlay_on('ol3')">Using the map</a></li>
-            <li><a href="#about" class="nav_content_link" onclick="overlay_on('ol4')">HCEC</a></li>
-        </ul>
-    </div>
-</div>
+@@include('./html_snippets/topbar.html')
 
 
+<div id="ol1" class="overlay" onclick="overlay_off(this)"><div class="ol_tmp">
+  @@include('html_pages/1.html')</div></div>
 
+<div id="ol2" class="overlay" onclick="overlay_off(this)"><div class="ol_tmp">
+    @@include('html_pages/2.html')</div></div>
 
-<div id="ol1" class="overlay" onclick="overlay_off(this)"><div class="ol_tmp">1</div></div>
-<div id="ol2" class="overlay" onclick="overlay_off(this)"><div class="ol_tmp">2</div></div>
-<div id="ol3" class="overlay" onclick="overlay_off(this)"><div class="ol_tmp">3</div></div>
-<div id="ol4" class="overlay" onclick="overlay_off(this)"><div class="ol_tmp">4</div></div>
-<div id="ol5" class="overlay" onclick="overlay_off(this)"><div class="ol_tmp">5</div></div>
+<div id="ol3" class="overlay" onclick="overlay_off(this)"><div class="ol_tmp">
+    @@include('html_pages/3.html')</div></div>
+
+<div id="ol4" class="overlay" onclick="overlay_off(this)"><div class="ol_tmp">
+    @@include('html_pages/4.html')</div></div>
+
+<div id="ol5" class="overlay" onclick="overlay_off(this)"><div class="ol_tmp">
+    @@include('html_pages/5.html')</div></div>
 
 
 <div class="container">
@@ -67,7 +62,7 @@
     <button id="menu-toggle-close" class="hamburger-menu close">
         <img alt="Show/Hide" class="hamburger-icon close" src="images/hamburger_icon.svg">
     </button>
-    <div class="layer_content"> may layers go here...
+    <div class="layer_content"> Map layers go here...
 
         <p><abbr title="HyperText Markup Language"><i class="bi bi-eye"></i></abbr></p>
         <p><i class="bi bi-eye-slash"></i></p>
@@ -75,11 +70,7 @@
         <p><i class="bi bi-eye-slash-fill"></i></p>
         <p><i class="bi bi-bullseye"></i></p>
     </div>
-
-
 </nav>
-
-
 
 <footer>
     <div class="footerRow">
@@ -90,10 +81,6 @@
 </footer>
 
 
-<script src="scripts/app.js"></script>
-<script src="scripts/overlay.js"></script>
-<script src="scripts/layers.js"></script>
-<!--<script src="scripts/off_canvas_menu.js"></script>-->
-<!--<script src="scripts/off_canvas_menu.js"></script>-->
+<script src="dist/scripts.js"></script>
 </body>
 </html>

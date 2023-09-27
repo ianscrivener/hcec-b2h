@@ -5,7 +5,7 @@ let offcanvasMenu = document.getElementById('offcanvas-menu');
 
 menuOpen.addEventListener('click', toggleMenuOpen);
 menuClose.addEventListener('click', toggleMenuClose);
-menuTop.addEventListener('click', toggleMenuClose);
+// menuTop.addEventListener('click', toggleMenuClose);
 
 function toggleMenuClose(e) {
     e.preventDefault();
