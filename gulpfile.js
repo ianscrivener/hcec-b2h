@@ -31,7 +31,7 @@ function watcherFn() {
 
   watch('src/css/*.*', {events: 'all'}, function (cb) {
     cssFn();
-    // console.log('CSS changes...');
+    console.log('CSS changes...');
     cb();
   });
 }

@@ -1,9 +1,14 @@
 html,
 body {
-  /*font-family: Arial, sans-serif;*/
-  font-family: "Arial Rounded MT Bold", sans-serif;
   color: #000;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Roboto, 'Arial Rounded MT Bold',sans-serif;
+  font-size: 1rem;
 }
+
+
 
 /*#mapid {*/
 /*  position: absolute;*/
