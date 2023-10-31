@@ -3,6 +3,8 @@
 .bi {
     font-size: 1rem;
     color: #000;
+    vert-align: bottom;
+    padding-right: 1px;
 }
 
 /*.container {*/
@@ -14,20 +16,21 @@
 
 abbr {
     font-style: italic;
-    font-size: 0.6rem;
+    font-size: 0.7rem;
     position: relative
 }
 
 abbr:hover::after {
-    background: #add8e6;
+    background: #ffa556;
     border-radius: 4px;
     bottom: 100%;
     content: attr(title);
     display: block;
     left: 100%;
-    padding: 1em;
+    padding: 0.5em;
     position: absolute;
-    width: 280px;
+    width: 160px;
+    height:10px;
     z-index: 1;
 }
 
@@ -65,7 +68,22 @@ abbr:hover::after {
 
 .layer_content{
     padding-top:35px;
+    font-size: 0.9rem;
 }
+
+.layer_content p{
+  padding:0;
+  vert-align: bottom;
+}
+
+.layer-1 {
+  line-height: 140%;
+}
+
+.layer-1 i{
+  top: 2px;
+}
+
 
 .offcanvas-menu {
     position: fixed;
