@@ -1,29 +1,9 @@
-// let map = L.map('map').setView([-33.8688, 151.2093], 13);
-// let mapLayers = []
-//
-// mapLayers[0] = L.tileLayer.wms('http://maps.six.nsw.gov.au/arcgis/services/public/NSW_Topo_Map/MapServer/WmsServer', {
-//   layers: '0',
-//   format: 'image/png',
-//   transparent: true,
-//   attribution: 'NSW Topo Map'
-// }).addTo(map);
-//
-// mapLayers[1] = L.tileLayer.wms('http://maps.six.nsw.gov.au/arcgis/services/public/NSW_Administrative_Boundaries/MapServer/WmsServer', {
-//   layers: '5',
-//   format: 'image/png',
-//   transparent: true,
-//   attribution: 'LGA'
-// }).addTo(map);
-
-
-// ############################################
-// constants
-
-const json_file = 'dist/layers.jsonl';
+// const json_file = 'dist/layers.jsonl';
+const json_file = 'src/data/layers.jsonl';
 
 const conf = {
-  zoom: 11,
-  lat: -33.0833,
+  zoom: 7,
+  lat: -33.0,
   long: 151.5833,
   coordRounding: 4
 };
@@ -37,40 +17,59 @@ let zState = {
   centreLong: 0,
 }
 
-let map = L.map('map').setView([-33.0, 151.2093], 7);
+let map = L.map('map').setView([conf.lat, conf.long], conf.zoom);
 
-// var wmsLayer = L.tileLayer.wms('http://maps.six.nsw.gov.au/arcgis/services/public/NSW_Administrative_Boundaries/MapServer/WmsServer', {
-//   layers: '5',
-//   format: 'image/png',
-//   transparent: true,
-//   attribution: 'LGA'
-// }).addTo(map);
+
+// ##############################################################
+// helper function -sort an array or objects      ######################
+function sortArrayOfObjectsByKey(array, key) {
+  return array.sort(function(a, b) {
+    if (a[key] < b[key]) {
+      return -1;
+    } else if (a[key] > b[key]) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+}
+
+
 
 // ##############################################################
 // helper function - load layer JSONL      ######################
 async function loadJsonl() {
-  // console.log("loading JSON:",json_file);
+  let jsonData = []
+
   const response = await fetch(json_file);
-  if (!response.ok) {
+  if (!response.ok) {                                         // throw an error if JSONL file ot found
     throw new Error('HTTP status ' + response.status);
   }
   const text = await response.text();
-  const lines = text.split('\n').filter(Boolean); // splits by newline and removes any empty lines
-  const jsonData = lines.map(line => JSON.parse(line)); // parses each line into a json object
-  // console.log(jsonData);
+  const lines = text.split('\n').filter(Boolean);    // splits by newline and removes any empty lines
+
+  lines.map(function(line) {                                  // loop through lines of JSONL
+    if (!line.trim().startsWith('//')) {                      // ignore commented lines
+        jsonData.push(JSON.parse(line));
+    }
+  });
+  jsonData = sortArrayOfObjectsByKey(jsonData, 'displayOrder')               // sort by displayOrder Ascending
+
+  // jsonData.reverse();
+  console.log(JSON.stringify(jsonData));
   return jsonData;
 }
 
 
 // ##############################################################
 // helper coord rounding ########################################
-function r(val) {
+function coordRounding(val) {
   return Number(val).toFixed(conf.coordRounding)
 }
 
 // ##############################################################
 // main function          #######################################
-async function main() {
+async function buildMap() {
   // variables
 
   let baseMaps = {};
@@ -177,24 +176,34 @@ async function main() {
 
     // ##################################################################
     // ArcGIS feature layer
-    if (layer.type === 'esriFeature') {
+    if (layer.layerType === 'esriFeature') {
       newLayer = L.esri.featureLayer(layer.url).addTo(map);
     }
 
     // ##################################################################
     // ArcGIS MapServer layer
-    if (layer.type === 'esriMapServer') {
-      console.log('ArcGIS MapServer layer:', layer.label)
+    //     L.esri.dynamicMapLayer({
+    //       url: "https://mapprod3.environment.nsw.gov.au/arcgis/rest/services/EDP/Administrative_Boundaries/MapServer",
+    //       layers: [0,1,2,3,4,5] // specifying the layer(s) to display
+    //     }).addTo(map);
+
+    if (layer.layerType === 'esriMapServer') {
+
+      console.log('esriMapServer:', layer.label)
       newLayer = L.esri.dynamicMapLayer({
         url: layer.url,
-        layers: layer.showLayers,
+        layers: layer.showLayers
       }).addTo(map);
+
+      console.log(layer.url);
+      console.log(JSON.stringify(layer.showLayers))
+
     }
 
     // ##################################################################
     // vectorTileLayer - "Esri vector tile service" - via plugin
     // https://developers.arcgis.com/esri-leaflet/api-reference/layers/vector-layer/
-    if (layer.type === 'esriVectorTile') {
+    if (layer.layerType === 'esriVectorTile') {
       newLayer = L.esri.Vector.vectorTileLayer(layer.url).addTo(map);
     }
 
@@ -231,9 +240,30 @@ const consoleLogStuff = function (arr) {
 
 // ##################################################################
 // ##################################################################
+async function buildTaxonomy() {
+
+  const layerConfig = await loadJsonl();
+
+  layerConfig.forEach((layer) => {
+
+    // GROUPS
+    if (layer.type === 'layerGroup') {
+      console.log(layer.label, layer.displayOrder)
+    }
+
+    // LAYERS
+    else {
+      console.log("   ", layer.layerType, '-', layer.label, '-', layer.displayOrder)
+    }
+  })
+}
+
+// ##################################################################
+// ##################################################################
 
 // consoleLogStuff(["conf","zState",loadJsonl()])
 
-
 loadJsonl();
-main();
+buildMap();
+
+// buildTaxonomy();

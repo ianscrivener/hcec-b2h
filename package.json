@@ -13,6 +13,7 @@
   "license": "MIT",
   "dependencies": {
     "autoprefixer": "^10.4.16",
+    "browser-sync": "^2.29.3",
     "cssnano": "^6.0.1",
     "gulp": "^4.0.2",
     "gulp-clean": "^0.4.0",
@@ -30,7 +31,9 @@
     "gulp-terser": "^2.1.0",
     "gulp-uglify": "^3.0.2",
     "minify": "^10.5.2",
-    "postcss": "^8.4.30",
-    "browser-sync": "^2.29.3"
+    "postcss": "^8.4.30"
+  },
+  "devDependencies": {
+    "through2": "^4.0.2"
   }
 }

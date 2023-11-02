@@ -9,11 +9,18 @@ const cssnano = require('gulp-cssnano');
 const sourcemaps = require('gulp-sourcemaps');
 const markdown = require('gulp-remarkable');
 const browserSyncObj = require('browser-sync').create();
+const through2 = require('through2');
 
 function watcherFn() {
   watch('src/js/*.*', {events: 'all'}, function (cb) {
     jsFn();
     // console.log('JS changes...');
+    cb();
+  });
+
+  watch('src/data/*', {events: 'all'}, function (cb) {
+    dataFn();
+    // console.log('Data directory changes...');
     cb();
   });
 
@@ -37,6 +44,21 @@ function watcherFn() {
 }
 
 // ####################################################################
+function dataFn() {
+  return src(['src/data/layers.jsonl'])
+    // .pipe(through2.obj(function(file, encoding, callback) {
+    //   // write your custom function here
+    //   // console.log(encoding)
+    //   // this.push(file);
+    //   callback();
+    // }))
+    .pipe(dest('dist/'))
+    .on('end', function(){
+      browserSyncObj.reload()
+      console.log('dataFn ran...');
+    });
+}
+
 function mdFn() {
   return src(['__pages/1.md','__pages/2.md','__pages/3.md','__pages/4.md','__pages/5.md'], { since: lastRun(mdFn) })
     .pipe(markdown({preset: 'commonmark'}))
@@ -110,8 +132,7 @@ function serveFn(){
 
 async function reloadFn(){
   console.log('reloadFn');
-  browserSyncObj.reload({})
-  ;
+  browserSyncObj.reload({});
 }
 
 
@@ -122,18 +143,19 @@ exports.js = jsFn;
 exports.css = cssFn;
 exports.html = htmlFn;
 exports.markdown = mdFn;
+exports.data = dataFn;
 exports.clean = cleanFn;
 
 exports.reload = reloadFn;
 
 exports.build = series(
   parallel(cleanFn,mdFn),
-  parallel(htmlFn, cssFn, jsFn)
+  parallel(htmlFn, cssFn, jsFn, dataFn)
 );
 
 exports.make = series(
   parallel(cleanFn,mdFn),
-  parallel(htmlFn, cssFn, jsFn)
+  parallel(htmlFn, cssFn, jsFn, dataFn)
 );
 
 exports.watch = watcherFn;
@@ -144,19 +166,7 @@ exports.default = parallel(serveFn,watcherFn);
 // ####################################################################
 // ####################################################################
 
-// // Fetch required plugins
-// const gulp = require('gulp');
-// const { src, dest, watch, series, parallel } = require('gulp');
-// const imagemin = require('gulp-imagemin');
-// const sourcemaps = require('gulp-sourcemaps');
-// const concat = require('gulp-concat');
-// const rename = require('gulp-rename');
-// const replace = require('gulp-replace');
-// const terser = require('gulp-terser');
-// const sass = require('gulp-sass')(require('sass'));
-// const postcss = require('gulp-postcss');
-// const autoprefixer = require('autoprefixer');
-// const cssnano = require('cssnano');
+
 //
 // // All paths
 // const paths = {
