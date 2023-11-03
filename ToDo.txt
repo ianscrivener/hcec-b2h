@@ -7,5 +7,5 @@ RIGHT HAND SIDE LAYER MENU
     - hook up query layer functionality
 
 
- - add onmouseover layer hovber tooltip
+ - add onmouseover layer hover tooltip
 

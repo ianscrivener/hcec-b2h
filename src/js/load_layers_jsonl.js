@@ -18,6 +18,6 @@ async function loadJsonl() {
   jsonData = sortArrayOfObjectsByKey(jsonData, 'displayOrder')     // sort by displayOrder Ascending
 
   // jsonData.reverse();
-  console.log("layerConfig loaded - layer count:", jsonData.length);
+  // console.log("layerConfig loaded - layer count:", jsonData.length);
   return jsonData;
 }

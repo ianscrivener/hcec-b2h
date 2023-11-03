@@ -12,9 +12,22 @@ function sortArrayOfObjectsByKey(array, key) {
   });
 }
 
-
 // ##############################################################
-// helper coord rounding ########################################
+// helper coord rounding
 function coordRounding(val) {
   return Number(val).toFixed(conf.coordRounding)
+}
+
+// ##############################################################
+// generate a short pseudo random UUID
+function generateShortID() {
+  return Math.random().toString(36).substr(2, 9);
+}
+
+
+// ##################################################################
+const consoleLogStuff = function (arr) {
+  arr.forEach(function (value) {
+    console.log(value, ':\n', JSON.stringify(eval(value)));
+  });
 }

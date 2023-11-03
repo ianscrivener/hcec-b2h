@@ -19,17 +19,24 @@ let zState = {
 }
 
 
-async function main() {
+// map layer definitions object
+let mapLayers = {};
 
+
+
+async function main(mapLayers) {
   // build the base leaflet.js map
-  let map = L.map('map').setView([conf.lat, conf.long], conf.zoom);
+  let leafletMap = L.map('map').setView([conf.lat, conf.long], conf.zoom);
 
   // load and process the dynamic map layer config  JSONL file
   layerConfig = await loadJsonl();
 
   // build the righthand side map layer menu
-  buildTaxonomy(layerConfig);
-
+  // buildTaxonomy(layerConfig);
+  build_map(layerConfig,leafletMap,mapLayers);
 }
 
-main();
+
+
+
+main(mapLayers);
