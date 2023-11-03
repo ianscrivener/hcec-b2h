@@ -1,72 +1,3 @@
-// const json_file = 'dist/layers.jsonl';
-const json_file = 'src/data/layers.jsonl';
-
-const conf = {
-  zoom: 7,
-  lat: -33.0,
-  long: 151.5833,
-  coordRounding: 4
-};
-
-let zState = {
-  mouseLat: 0,
-  mouseLong: 0,
-  mouseX: 0,
-  mouseY: 0,
-  centreLat: 0,
-  centreLong: 0,
-}
-
-let map = L.map('map').setView([conf.lat, conf.long], conf.zoom);
-
-
-// ##############################################################
-// helper function -sort an array or objects      ######################
-function sortArrayOfObjectsByKey(array, key) {
-  return array.sort(function(a, b) {
-    if (a[key] < b[key]) {
-      return -1;
-    } else if (a[key] > b[key]) {
-      return 1;
-    } else {
-      return 0;
-    }
-  });
-}
-
-
-
-// ##############################################################
-// helper function - load layer JSONL      ######################
-async function loadJsonl() {
-  let jsonData = []
-
-  const response = await fetch(json_file);
-  if (!response.ok) {                                         // throw an error if JSONL file ot found
-    throw new Error('HTTP status ' + response.status);
-  }
-  const text = await response.text();
-  const lines = text.split('\n').filter(Boolean);    // splits by newline and removes any empty lines
-
-  lines.map(function(line) {                                  // loop through lines of JSONL
-    if (!line.trim().startsWith('//')) {                      // ignore commented lines
-        jsonData.push(JSON.parse(line));
-    }
-  });
-  jsonData = sortArrayOfObjectsByKey(jsonData, 'displayOrder')               // sort by displayOrder Ascending
-
-  // jsonData.reverse();
-  console.log(JSON.stringify(jsonData));
-  return jsonData;
-}
-
-
-// ##############################################################
-// helper coord rounding ########################################
-function coordRounding(val) {
-  return Number(val).toFixed(conf.coordRounding)
-}
-
 // ##############################################################
 // main function          #######################################
 async function buildMap() {
@@ -128,8 +59,8 @@ async function buildMap() {
       return; // skips the current iteration and continues with the next
     }
 
-    console.log(layer.layerType, '-', layer.label)
-    console.log(JSON.stringify(layer))
+    // console.log(layer.layerType, '-', layer.label)
+    // console.log(JSON.stringify(layer))
 
     let newLayer    = {};
     layer.type      = layer.type.trim()
@@ -189,14 +120,14 @@ async function buildMap() {
 
     if (layer.layerType === 'esriMapServer') {
 
-      console.log('esriMapServer:', layer.label)
+      // console.log('esriMapServer:', layer.label)
       newLayer = L.esri.dynamicMapLayer({
         url: layer.url,
         layers: layer.showLayers
       }).addTo(map);
 
-      console.log(layer.url);
-      console.log(JSON.stringify(layer.showLayers))
+      // console.log(layer.url);
+      // console.log(JSON.stringify(layer.showLayers))
 
     }
 
@@ -238,32 +169,4 @@ const consoleLogStuff = function (arr) {
 }
 
 
-// ##################################################################
-// ##################################################################
-async function buildTaxonomy() {
 
-  const layerConfig = await loadJsonl();
-
-  layerConfig.forEach((layer) => {
-
-    // GROUPS
-    if (layer.type === 'layerGroup') {
-      console.log(layer.label, layer.displayOrder)
-    }
-
-    // LAYERS
-    else {
-      console.log("   ", layer.layerType, '-', layer.label, '-', layer.displayOrder)
-    }
-  })
-}
-
-// ##################################################################
-// ##################################################################
-
-// consoleLogStuff(["conf","zState",loadJsonl()])
-
-loadJsonl();
-buildMap();
-
-// buildTaxonomy();

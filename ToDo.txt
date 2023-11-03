@@ -1,0 +1,11 @@
+RIGHT HAND SIDE LAYER MENU
+
+ - add hide/show icon functionality
+    - hook up hide/show functionality
+
+ - add active/inactive magnifying glass icon functionality
+    - hook up query layer functionality
+
+
+ - add onmouseover layer hovber tooltip
+

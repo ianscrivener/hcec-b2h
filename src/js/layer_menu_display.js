@@ -15,7 +15,9 @@ function toggleMenuClose(e) {
 }
 
 function toggleMenuOpen(e) {
-    e.preventDefault();
+    if(e) {
+      e.preventDefault();
+    }
     offcanvasMenu.classList.toggle('show');
     menuOpen.style.display = 'none';
     menuClose.style.display = 'block';
