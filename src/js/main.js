@@ -22,11 +22,12 @@ let zState = {
 // map layer definitions object
 let mapLayers = {};
 
+let leafletMap = L.map('map').setView([conf.lat, conf.long], conf.zoom);
+let leafletControl = L.control.layers().addTo(leafletMap);
 
-
-async function main(mapLayers) {
+async function main(mapLayers,leafletMap) {
   // build the base leaflet.js map
-  let leafletMap = L.map('map').setView([conf.lat, conf.long], conf.zoom);
+
 
   // load and process the dynamic map layer config  JSONL file
   layerConfig = await loadJsonl();
@@ -39,4 +40,4 @@ async function main(mapLayers) {
 
 
 
-main(mapLayers);
+main(mapLayers,leafletMap);

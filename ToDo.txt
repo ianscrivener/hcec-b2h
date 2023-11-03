@@ -9,3 +9,20 @@ RIGHT HAND SIDE LAYER MENU
 
  - add onmouseover layer hover tooltip
 
+
+
+ycixfgelj
+
+
+// set visible
+let uuid = 'sqtgrt54r';
+mapLayers[uuid].layerObject.addTo(leafletMap);
+
+// set hidden
+let uuid = 'sqtgrt54r';
+mapLayers[uuid].layerObject.remove()
+
+
+mapLayers[Object.keys(mapLayers)[0]].layerObject.addTo(leafletMap);
+
+

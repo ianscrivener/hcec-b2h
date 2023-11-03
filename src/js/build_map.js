@@ -96,7 +96,9 @@ async function build_map(layerConfig,map,map_layers) {
                         // label:          layer.label.trim(),
                         layerConfig:    layer,
                         visible:        layer.visible,
-                        active:         layer.active
+                        active:         layer.active,
+                        show:           function(){mapLayers[uuid].layerObject.addTo(leafletMap);return 1;},
+                        hide:           function(){mapLayers[uuid].layerObject.addTo(leafletMap);return 0;}
                         };
 
     // ##################################################################
